@@ -13,7 +13,7 @@ You can help CLA Assistant by helping others who use it and need support.
 ## Analyze Issues
 
 Analyzing issue reports can be a lot of effort. Any help is welcome!
-Go to [the GitHub issue tracker](https://github.com/cla-assistant/cla-assistant/issues?state=open) and find an open issue which needs additional work or a bugfix (e.g. issues labeled with "help wanted" or "bug").
+Go to [the GitHub issue tracker](https://github.com/DataDog/contributor-assistant-github-action/issues) and find an open issue which needs additional work or a bugfix (e.g. issues labeled with "help wanted" or "bug").
 
 Additional work could include any further information, or a gist, or it might be a hint that helps understanding the issue. Maybe you can even find and [contribute](#contribute-code) a bugfix?
 
@@ -22,7 +22,7 @@ Additional work could include any further information, or a gist, or it might be
 If you find a bug - behavior of CLA Assistant code contradicting your expectation - you are welcome to report it.
 We can only handle well-reported, actual bugs, so please follow the guidelines below.
 
-Once you have familiarized with the guidelines, you can go to the [GitHub issue tracker for CLA Assistant](https://github.com/cla-assistant/cla-assistant/issues/new) to report the issue.
+Once you have familiarized with the guidelines, you can go to the [GitHub issue tracker for this repository](https://github.com/DataDog/contributor-assistant-github-action/issues/new) to report the issue.
 
 ### Quick Checklist for Bug Reports
 
@@ -106,7 +106,7 @@ These are some of the rules we try to follow:
 ### How to contribute - the Process
 
 1.  Make sure the change would be welcome (e.g. a bugfix or a useful feature); best do so by proposing it in a GitHub issue
-2.  Create a branch forking the cla-assistant repository and do your change
+2.  Create a branch of this repository and do your change
 3.  Commit and push your changes on that branch
 4.  In the commit message
  - Describe the problem you fix with this change.

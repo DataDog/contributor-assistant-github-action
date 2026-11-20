@@ -8,7 +8,7 @@ on:
     - '*'
   pull_request:
    branches:
-   - master
+   - main
 
 jobs:
   build:
@@ -18,18 +18,18 @@ jobs:
         node-version: [18.x, 20.x]
     steps:
     - name: Initialize Energy Estimation
-      uses: green-coding-berlin/eco-ci-energy-estimation@v1
+      uses: green-coding-berlin/eco-ci-energy-estimation@782dd4a31bc426a6ae26a7b08d89af454b10ffc0 # v5.3.0
       with:
         task: start-measurement
     - name: "Checkout repository"
-      uses: actions/checkout@v4
+      uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
     - name: Checkout Repo Measurement
-      uses: green-coding-berlin/eco-ci-energy-estimation@v1
+      uses: green-coding-berlin/eco-ci-energy-estimation@782dd4a31bc426a6ae26a7b08d89af454b10ffc0 # v5.3.0
       with:
         task: get-measurement
         label: 'repository checkout'
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@dbe1369d7be17e7823f8c1ee1ae8bec5779239dd # v3.9.0
       with:
         node-version: ${{ matrix.node-version }}
     - name: Npm install
@@ -37,11 +37,11 @@ jobs:
     - name: Npm build
       run: npm run build --if-present
     - name: Checkout Repo Measurement
-      uses: green-coding-berlin/eco-ci-energy-estimation@v1
+      uses: green-coding-berlin/eco-ci-energy-estimation@782dd4a31bc426a6ae26a7b08d89af454b10ffc0 # v5.3.0
       with:
         task: get-measurement
         label: 'Npm activities'
     - name: Show Energy Results
-      uses: green-coding-berlin/eco-ci-energy-estimation@v1
+      uses: green-coding-berlin/eco-ci-energy-estimation@782dd4a31bc426a6ae26a7b08d89af454b10ffc0 # v5.3.0
       with:
         task: display-results
