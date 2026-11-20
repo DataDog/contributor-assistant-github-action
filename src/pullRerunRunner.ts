@@ -38,33 +38,37 @@ async function getBranchOfPullRequest(): Promise<string> {
 }
 
 async function getSelfWorkflowId(): Promise<number> {
-  const perPage = 30
-  let hasNextPage = true
-
-  for (let page = 1; hasNextPage === true; page++) {
-    const workflowList = await octokit.actions.listRepoWorkflows({
-      owner: context.repo.owner,
-      repo: context.repo.repo,
-      per_page: perPage,
-      page
-    })
-
-    if (workflowList.data.total_count < page * perPage) {
-      hasNextPage = false
-    }
-
-    const workflow = workflowList.data.workflows.find(
-      w => w.name == context.workflow
+  const runId = context.runId
+  if (!Number.isInteger(runId) || runId <= 0) {
+    throw new Error(
+      `Unable to determine the current workflow run id (GITHUB_RUN_ID is missing or invalid), can't resolve the workflow id..`
     )
-
-    if (workflow) {
-      return workflow.id
-    }
   }
 
-  throw new Error(
-    `Unable to locate this workflow's ID in this repository, can't trigger job..`
-  )
+  let response: any
+  try {
+    response = await octokit.actions.getWorkflowRun({
+      owner: context.repo.owner,
+      repo: context.repo.repo,
+      run_id: runId
+    })
+  } catch (error) {
+    const status = (error as any)?.status
+    if (status === 403 || status === 404) {
+      throw new Error(
+        `Unable to determine this workflow's id: GitHub API responded with ${status} when reading workflow run ${runId}. No fallback lookup is performed..`
+      )
+    }
+    throw error
+  }
+
+  const workflowId = response?.data?.workflow_id
+  if (!Number.isInteger(workflowId) || workflowId <= 0) {
+    throw new Error(
+      `Unable to determine this workflow's id: the current workflow run ${runId} returned a missing or invalid workflow_id..`
+    )
+  }
+  return workflowId
 }
 
 async function listWorkflowRunsInBranch(
