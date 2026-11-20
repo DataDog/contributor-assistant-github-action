@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [18.x, 20.x]
+        node-version: [20.x, 24.x]
     steps:
     - name: Initialize Energy Estimation
       uses: green-coding-berlin/eco-ci-energy-estimation@782dd4a31bc426a6ae26a7b08d89af454b10ffc0 # v5.3.0
@@ -29,13 +29,15 @@ jobs:
         task: get-measurement
         label: 'repository checkout'
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@dbe1369d7be17e7823f8c1ee1ae8bec5779239dd # v3.9.0
+      uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
       with:
         node-version: ${{ matrix.node-version }}
     - name: Npm install
       run: npm ci
     - name: Npm build
       run: npm run build --if-present
+    - name: Npm test
+      run: npm test
     - name: Checkout Repo Measurement
       uses: green-coding-berlin/eco-ci-energy-estimation@782dd4a31bc426a6ae26a7b08d89af454b10ffc0 # v5.3.0
       with:
