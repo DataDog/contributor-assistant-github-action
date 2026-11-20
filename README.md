@@ -1,10 +1,4 @@
-![build](https://github.com/cla-assistant/github-action/workflows/build/badge.svg)
-
-
-> [!IMPORTANT]
-> **This repository is no longer actively maintained.** I no longer have the bandwidth to maintain this project. The repository has been archived and is now read-only. 
->
-> You are welcome to **fork this repository** and continue development independently. All existing releases remain functional. Thank you to all contributors and users for your support over the years.
+![build](https://github.com/DataDog/contributor-assistant-github-action/workflows/build/badge.svg)
 
 # Handling CLAs and DCOs via GitHub Action
 
@@ -44,7 +38,7 @@ jobs:
     steps:
       - name: "CLA Assistant"
         if: (github.event.comment.body == 'recheck' || github.event.comment.body == 'I have read the CLA Document and I hereby sign the CLA') || github.event_name == 'pull_request_target'
-        uses: contributor-assistant/github-action@v2.6.1
+        uses: DataDog/contributor-assistant-github-action@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # the below token should have repo scope and must be manually added by you in the repository's secret
@@ -72,7 +66,7 @@ jobs:
 
 ##### Demo for step 1
 
-![add-cla-file](https://github.com/cla-assistant/github-action/blob/master/images/adding-clafile.gif?raw=true)
+![add-cla-file](https://github.com/DataDog/contributor-assistant-github-action/blob/main/images/adding-clafile.gif?raw=true)
 
 #### 2. Pull Request event triggers CLA Workflow
 
@@ -86,7 +80,7 @@ If the contributor has already signed the CLA, then the PR status will pass with
 
 ##### Demo for step 2 and 3
 
-![signature-process](https://github.com/cla-assistant/github-action/blob/master/images/signature-process.gif?raw=true)
+![signature-process](https://github.com/DataDog/contributor-assistant-github-action/blob/main/images/signature-process.gif?raw=true)
 
 <br/>
 
@@ -101,7 +95,7 @@ and `remote-repository-name`: `<your repo name>` in your CLA workflow file.
 
 ##### Demo for step 4
 
-![signature-storage-file](https://github.com/cla-assistant/github-action/blob/master/images/signature-storage-file.gif?raw=true)
+![signature-storage-file](https://github.com/DataDog/contributor-assistant-github-action/blob/main/images/signature-storage-file.gif?raw=true)
 
 #### 5. Users and bots in allowlist
 
@@ -109,7 +103,7 @@ If a GitHub username is included in the allowlist, they will not be required to 
 
 ##### Demo for step 5
 
-![allowlist](https://github.com/cla-assistant/github-action/blob/master/images/allowlist.gif?raw=true)
+![allowlist](https://github.com/DataDog/contributor-assistant-github-action/blob/main/images/allowlist.gif?raw=true)
 
 #### 6. Adding Personal Access Token as a Secret
 
@@ -118,7 +112,7 @@ This PAT should have repo scope and is only required if you have configured to s
 
 ##### Demo for step 6
 
-![personal-access-token](https://github.com/cla-assistant/github-action/blob/master/images/personal-access-token.gif?raw=true)
+![personal-access-token](https://github.com/DataDog/contributor-assistant-github-action/blob/main/images/personal-access-token.gif?raw=true)
 
 ### Environmental Variables:
 
@@ -135,7 +129,7 @@ This PAT should have repo scope and is only required if you have configured to s
 | `path-to-document`     | _required_ |  provide full URL `https://<clafile>` to the document which shall be signed by the contributor(s)  It can be any file e.g. inside the repository or it can be a gist. | https://github.com/cla-assistant/github-action/blob/master/SAPCLA.md |
 | `path-to-signatures`       | _optional_ |  Path to the JSON file where  all the signatures of the contributors will be stored inside the repository. | signatures/version1/cla.json |
 | `branch`   | _optional_ |  Branch in which all the signatures of the contributors will be stored and Default branch is `master`.  | master |
-| `allowlist`   | _optional_ | You can specify users and bots to be [added in allowlist](https://github.com/cla-assistant/github-action#5-users-and-bots-in-allowlist).  | user1,user2,bot* |
+| `allowlist`   | _optional_ | You can specify users and bots to be [added in allowlist](#5-users-and-bots-in-allowlist).  | user1,user2,bot* |
 | `remote-repository-name`   | _optional_ | provide the remote repository name where all the signatures should be stored . | remote repository name |
 | `remote-organization-name`   | _optional_ | provide the remote organization name where all the signatures should be stored. | remote organization name |
 | `create-file-commit-message`   | _optional_ |Commit message when a new CLA file is created. | Creating file for storing CLA Signatures. |
