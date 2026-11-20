@@ -1,12 +1,22 @@
-import * as core from '@actions/core'
-import * as github from '@actions/github'
-import { context } from '@actions/github'
-import { getclas } from '../src/checkcla'
-import { lockPullRequest } from '../src/pullRequestLock'
-import { run } from '../src/main'
-import { mocked } from 'ts-jest/utils'
+import { lockPullRequest } from '../src/pullrequest/pullRequestLock'
 
-jest.mock('@actions/core')
-jest.mock('@actions/github')
+// Factory mock (not automock): loading the real src/octokit module requires
+// a GITHUB_TOKEN and throws without one.
+jest.mock('../src/octokit', () => ({
+  octokit: {
+    issues: {
+      lock: jest.fn()
+    }
+  }
+}))
 
-//const mockedLockPullRequest = mocked(lockPullRequest)
+const mockedLockPullRequest = jest.mocked(lockPullRequest)
+
+// Placeholder suite: lockPullRequest behavior is not covered yet. This file
+// previously imported modules removed in the src/ restructure
+// (src/checkcla, src/pullRequestLock) and never ran a test.
+describe('lockPullRequest', () => {
+  test('is exported from src/pullrequest/pullRequestLock', () => {
+    expect(typeof mockedLockPullRequest).toBe('function')
+  })
+})
