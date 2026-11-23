@@ -1,10 +1,4 @@
-![build](https://github.com/cla-assistant/github-action/workflows/build/badge.svg)
-
-
-> [!IMPORTANT]
-> **This repository is no longer actively maintained.** I no longer have the bandwidth to maintain this project. The repository has been archived and is now read-only. 
->
-> You are welcome to **fork this repository** and continue development independently. All existing releases remain functional. Thank you to all contributors and users for your support over the years.
+![build](https://github.com/DataDog/contributor-assistant-github-action/workflows/build/badge.svg)
 
 # Handling CLAs and DCOs via GitHub Action
 
@@ -44,7 +38,7 @@ jobs:
     steps:
       - name: "CLA Assistant"
         if: (github.event.comment.body == 'recheck' || github.event.comment.body == 'I have read the CLA Document and I hereby sign the CLA') || github.event_name == 'pull_request_target'
-        uses: contributor-assistant/github-action@v2.6.1
+        uses: DataDog/contributor-assistant-github-action@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # the below token should have repo scope and must be manually added by you in the repository's secret
@@ -72,7 +66,7 @@ jobs:
 
 ##### Demo for step 1
 
-![add-cla-file](https://github.com/cla-assistant/github-action/blob/master/images/adding-clafile.gif?raw=true)
+![add-cla-file](https://github.com/DataDog/contributor-assistant-github-action/blob/main/images/adding-clafile.gif?raw=true)
 
 #### 2. Pull Request event triggers CLA Workflow
 
@@ -86,7 +80,7 @@ If the contributor has already signed the CLA, then the PR status will pass with
 
 ##### Demo for step 2 and 3
 
-![signature-process](https://github.com/cla-assistant/github-action/blob/master/images/signature-process.gif?raw=true)
+![signature-process](https://github.com/DataDog/contributor-assistant-github-action/blob/main/images/signature-process.gif?raw=true)
 
 <br/>
 
@@ -101,7 +95,7 @@ and `remote-repository-name`: `<your repo name>` in your CLA workflow file.
 
 ##### Demo for step 4
 
-![signature-storage-file](https://github.com/cla-assistant/github-action/blob/master/images/signature-storage-file.gif?raw=true)
+![signature-storage-file](https://github.com/DataDog/contributor-assistant-github-action/blob/main/images/signature-storage-file.gif?raw=true)
 
 #### 5. Users and bots in allowlist
 
@@ -109,7 +103,7 @@ If a GitHub username is included in the allowlist, they will not be required to 
 
 ##### Demo for step 5
 
-![allowlist](https://github.com/cla-assistant/github-action/blob/master/images/allowlist.gif?raw=true)
+![allowlist](https://github.com/DataDog/contributor-assistant-github-action/blob/main/images/allowlist.gif?raw=true)
 
 #### 6. Adding Personal Access Token as a Secret
 
@@ -118,7 +112,7 @@ This PAT should have repo scope and is only required if you have configured to s
 
 ##### Demo for step 6
 
-![personal-access-token](https://github.com/cla-assistant/github-action/blob/master/images/personal-access-token.gif?raw=true)
+![personal-access-token](https://github.com/DataDog/contributor-assistant-github-action/blob/main/images/personal-access-token.gif?raw=true)
 
 ### Environmental Variables:
 
@@ -135,7 +129,7 @@ This PAT should have repo scope and is only required if you have configured to s
 | `path-to-document`     | _required_ |  provide full URL `https://<clafile>` to the document which shall be signed by the contributor(s)  It can be any file e.g. inside the repository or it can be a gist. | https://github.com/cla-assistant/github-action/blob/master/SAPCLA.md |
 | `path-to-signatures`       | _optional_ |  Path to the JSON file where  all the signatures of the contributors will be stored inside the repository. | signatures/version1/cla.json |
 | `branch`   | _optional_ |  Branch in which all the signatures of the contributors will be stored and Default branch is `master`.  | master |
-| `allowlist`   | _optional_ | You can specify users and bots to be [added in allowlist](https://github.com/cla-assistant/github-action#5-users-and-bots-in-allowlist).  | user1,user2,bot* |
+| `allowlist`   | _optional_ | You can specify users and bots to be [added in allowlist](#5-users-and-bots-in-allowlist).  | user1,user2,bot* |
 | `remote-repository-name`   | _optional_ | provide the remote repository name where all the signatures should be stored . | remote repository name |
 | `remote-organization-name`   | _optional_ | provide the remote organization name where all the signatures should be stored. | remote organization name |
 | `create-file-commit-message`   | _optional_ |Commit message when a new CLA file is created. | Creating file for storing CLA Signatures. |
@@ -145,243 +139,6 @@ This PAT should have repo scope and is only required if you have configured to s
 | `custom-allsigned-prcomment`   | _optional_ | pull request comment when everyone has signed | All Contributors have signed the CLA. |
 | `lock-pullrequest-aftermerge`   | _optional_ | Boolean input for locking the pull request after merging. Default is set to `true`.  It is highly recommended to lock the Pull Request after merging so that the Contributors won't be able to revoke their signature comments after merge | false |
 | `suggest-recheck`   | _optional_ | Boolean input for indicating if the action's comment should suggest that users comment `recheck`. Default is set to `true`. | false |
-
-## Contributors
-
-<!-- readme: collaborators,contributors -start -->
-<table>
-<tr>
-    <td align="center">
-        <a href="https://github.com/matbos">
-            <img src="https://avatars.githubusercontent.com/u/1948188?v=4" width="100;" alt="matbos"/>
-            <br />
-            <sub><b>Mateusz Boś</b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/michael-spengler">
-            <img src="https://avatars.githubusercontent.com/u/43786652?v=4" width="100;" alt="michael-spengler"/>
-            <br />
-            <sub><b>Michael Spengler</b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/ibakshay">
-            <img src="https://avatars.githubusercontent.com/u/33329946?v=4" width="100;" alt="ibakshay"/>
-            <br />
-            <sub><b>Akshay Iyyadurai Balasundaram</b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/AnandChowdhary">
-            <img src="https://avatars.githubusercontent.com/u/2841780?v=4" width="100;" alt="AnandChowdhary"/>
-            <br />
-            <sub><b>Anand Chowdhary</b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/kingthorin">
-            <img src="https://avatars.githubusercontent.com/u/7570458?v=4" width="100;" alt="kingthorin"/>
-            <br />
-            <sub><b>Rick M</b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/Writhe">
-            <img src="https://avatars.githubusercontent.com/u/2022097?v=4" width="100;" alt="Writhe"/>
-            <br />
-            <sub><b>Filip Moroz</b></sub>
-        </a>
-    </td></tr>
-<tr>
-    <td align="center">
-        <a href="https://github.com/mmv08">
-            <img src="https://avatars.githubusercontent.com/u/16622558?v=4" width="100;" alt="mmv08"/>
-            <br />
-            <sub><b>Mikhail</b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/manifestinteractive">
-            <img src="https://avatars.githubusercontent.com/u/508411?v=4" width="100;" alt="manifestinteractive"/>
-            <br />
-            <sub><b>Peter Schmalfeldt</b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/mattrosno">
-            <img src="https://avatars.githubusercontent.com/u/1691245?v=4" width="100;" alt="mattrosno"/>
-            <br />
-            <sub><b>Matt Rosno</b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/Or-Geva">
-            <img src="https://avatars.githubusercontent.com/u/9606235?v=4" width="100;" alt="Or-Geva"/>
-            <br />
-            <sub><b>Or Geva</b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/pellared">
-            <img src="https://avatars.githubusercontent.com/u/5067549?v=4" width="100;" alt="pellared"/>
-            <br />
-            <sub><b>Robert Pająk</b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/ScottBrenner">
-            <img src="https://avatars.githubusercontent.com/u/416477?v=4" width="100;" alt="ScottBrenner"/>
-            <br />
-            <sub><b>Scott Brenner</b></sub>
-        </a>
-    </td></tr>
-<tr>
-    <td align="center">
-        <a href="https://github.com/silviogutierrez">
-            <img src="https://avatars.githubusercontent.com/u/92824?v=4" width="100;" alt="silviogutierrez"/>
-            <br />
-            <sub><b>Silvio</b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/azzamsa">
-            <img src="https://avatars.githubusercontent.com/u/17734314?v=4" width="100;" alt="azzamsa"/>
-            <br />
-            <sub><b>Azzam S.A</b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/Tropicao">
-            <img src="https://avatars.githubusercontent.com/u/4692087?v=4" width="100;" alt="Tropicao"/>
-            <br />
-            <sub><b>Alexis Lothoré</b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/alohr51">
-            <img src="https://avatars.githubusercontent.com/u/3623618?v=4" width="100;" alt="alohr51"/>
-            <br />
-            <sub><b>Andrew Lohr</b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/aymanbagabas">
-            <img src="https://avatars.githubusercontent.com/u/3187948?v=4" width="100;" alt="aymanbagabas"/>
-            <br />
-            <sub><b>Ayman Bagabas</b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/fishcharlie">
-            <img src="https://avatars.githubusercontent.com/u/860375?v=4" width="100;" alt="fishcharlie"/>
-            <br />
-            <sub><b>Charlie Fish</b></sub>
-        </a>
-    </td></tr>
-<tr>
-    <td align="center">
-        <a href="https://github.com/darrellwarde">
-            <img src="https://avatars.githubusercontent.com/u/8117355?v=4" width="100;" alt="darrellwarde"/>
-            <br />
-            <sub><b>Darrell Warde</b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/Holzhaus">
-            <img src="https://avatars.githubusercontent.com/u/1834516?v=4" width="100;" alt="Holzhaus"/>
-            <br />
-            <sub><b>Jan Holthuis</b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/nwalters512">
-            <img src="https://avatars.githubusercontent.com/u/1476544?v=4" width="100;" alt="nwalters512"/>
-            <br />
-            <sub><b>Nathan Walters</b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/rokups">
-            <img src="https://avatars.githubusercontent.com/u/19151258?v=4" width="100;" alt="rokups"/>
-            <br />
-            <sub><b>Rokas Kupstys</b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/shunkakinoki">
-            <img src="https://avatars.githubusercontent.com/u/39187513?v=4" width="100;" alt="shunkakinoki"/>
-            <br />
-            <sub><b>Shun Kakinoki</b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/simonmeggle">
-            <img src="https://avatars.githubusercontent.com/u/1897410?v=4" width="100;" alt="simonmeggle"/>
-            <br />
-            <sub><b>Simon Meggle</b></sub>
-        </a>
-    </td></tr>
-<tr>
-    <td align="center">
-        <a href="https://github.com/t8">
-            <img src="https://avatars.githubusercontent.com/u/20846869?v=4" width="100;" alt="t8"/>
-            <br />
-            <sub><b>Tate Berenbaum</b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/Krinkle">
-            <img src="https://avatars.githubusercontent.com/u/156867?v=4" width="100;" alt="Krinkle"/>
-            <br />
-            <sub><b>Timo Tijhof</b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/AndrewGable">
-            <img src="https://avatars.githubusercontent.com/u/2838819?v=4" width="100;" alt="AndrewGable"/>
-            <br />
-            <sub><b>Andrew Gable</b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/knanao">
-            <img src="https://avatars.githubusercontent.com/u/50069775?v=4" width="100;" alt="knanao"/>
-            <br />
-            <sub><b>Knanao</b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/tada5hi">
-            <img src="https://avatars.githubusercontent.com/u/13162758?v=4" width="100;" alt="tada5hi"/>
-            <br />
-            <sub><b>Peter</b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/wh201906">
-            <img src="https://avatars.githubusercontent.com/u/62299611?v=4" width="100;" alt="wh201906"/>
-            <br />
-            <sub><b>Self Not Found</b></sub>
-        </a>
-    </td></tr>
-<tr>
-    <td align="center">
-        <a href="https://github.com/woxiwangshunlibiye">
-            <img src="https://avatars.githubusercontent.com/u/106640041?v=4" width="100;" alt="woxiwangshunlibiye"/>
-            <br />
-            <sub><b>Woyaoshunlibiye </b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/yahavi">
-            <img src="https://avatars.githubusercontent.com/u/11367982?v=4" width="100;" alt="yahavi"/>
-            <br />
-            <sub><b>Yahav Itzhak</b></sub>
-        </a>
-    </td></tr>
-</table>
-<!-- readme: collaborators,contributors -end -->
 
 ## License
 
