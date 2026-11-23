@@ -360,7 +360,7 @@ function updateFile(sha, claFileContent, reactedCommitters) {
                 ? input
                     .getSignedCommitMessage()
                     .replace('$contributorName', github_1.context.actor)
-                    // .replace('$pullRequestNo', pullRequestNo.toString())
+                    .replace('$pullRequestNo', pullRequestNo.toString())
                     .replace('$owner', owner)
                     .replace('$repo', repo)
                 : `@${github_1.context.actor} has signed the CLA in ${owner}/${repo}#${pullRequestNo}`,
@@ -456,25 +456,32 @@ function getBranchOfPullRequest() {
     });
 }
 function getSelfWorkflowId() {
+    var _a;
     return __awaiter(this, void 0, void 0, function* () {
-        const perPage = 30;
-        let hasNextPage = true;
-        for (let page = 1; hasNextPage === true; page++) {
-            const workflowList = yield octokit_1.octokit.actions.listRepoWorkflows({
+        const runId = github_1.context.runId;
+        if (!Number.isInteger(runId) || runId <= 0) {
+            throw new Error(`Unable to determine the current workflow run id (GITHUB_RUN_ID is missing or invalid), can't resolve the workflow id..`);
+        }
+        let response;
+        try {
+            response = yield octokit_1.octokit.actions.getWorkflowRun({
                 owner: github_1.context.repo.owner,
                 repo: github_1.context.repo.repo,
-                per_page: perPage,
-                page
+                run_id: runId
             });
-            if (workflowList.data.total_count < page * perPage) {
-                hasNextPage = false;
-            }
-            const workflow = workflowList.data.workflows.find(w => w.name == github_1.context.workflow);
-            if (workflow) {
-                return workflow.id;
-            }
         }
-        throw new Error(`Unable to locate this workflow's ID in this repository, can't trigger job..`);
+        catch (error) {
+            const status = error === null || error === void 0 ? void 0 : error.status;
+            if (status === 403 || status === 404) {
+                throw new Error(`Unable to determine this workflow's id: GitHub API responded with ${status} when reading workflow run ${runId}. No fallback lookup is performed..`);
+            }
+            throw error;
+        }
+        const workflowId = (_a = response === null || response === void 0 ? void 0 : response.data) === null || _a === void 0 ? void 0 : _a.workflow_id;
+        if (!Number.isInteger(workflowId) || workflowId <= 0) {
+            throw new Error(`Unable to determine this workflow's id: the current workflow run ${runId} returned a missing or invalid workflow_id..`);
+        }
+        return workflowId;
     });
 }
 function listWorkflowRunsInBranch(branch, workflowId) {

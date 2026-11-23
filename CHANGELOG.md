@@ -43,6 +43,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   no workflow enumeration and has no enumeration fallback; failures are
   explicit.
 
+### Security
+
+- All CI workflow actions are pinned to full-length commit SHAs, per the
+  repository's supply-chain policy (floating tags are rejected). The energy
+  measurement action (`eco-ci-energy-estimation`) was upgraded from v1 to
+  v5.3.0 as part of this change.
+
 ### Removed
 
 - The `assign-to-project` CI workflow: it assigned new issues to the upstream
