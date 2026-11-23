@@ -47,6 +47,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - The `assign-to-project` CI workflow: it assigned new issues to the upstream
   repository's retired GitHub classic Projects board and could only fail.
+- The `add-contributors-in-readme` CI workflow and the auto-generated
+  contributors picture table in the README.
 
 ## [2.6.1] - 2024-09-26
 
